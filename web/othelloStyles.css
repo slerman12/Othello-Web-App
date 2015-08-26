@@ -3,9 +3,11 @@
     border: solid 1px black;
 }
 #board div {
+    font-size: 20px;
+    line-height: 25px;
     float: left;
-    width: 18px;
-    height: 18px;
+    width: 25px;
+    height: 25px;
     text-align: center;
 }
 #board .even {

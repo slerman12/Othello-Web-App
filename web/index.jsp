@@ -56,7 +56,8 @@
   </script>
   <style>
     .board span {
-      margin-right: 5px;
+      float: left;
+      width: 20px;
     }
   </style>
 </head>

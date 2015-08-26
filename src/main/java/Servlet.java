@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
-class ValidPlayerMove {
+class PlayerMove {
 
     char[][] board;
+    ArrayList<EmptySquare> emptySpaces;
     boolean valid;
 
     public char[][] getBoard() {
@@ -21,6 +23,14 @@ class ValidPlayerMove {
     public void setBoard(char[][] board) {
 
         this.board = board;
+    }
+
+    public ArrayList<EmptySquare> getEmptySpaces() {
+        return emptySpaces;
+    }
+
+    public void setEmptySpaces(ArrayList<EmptySquare> emptySpaces) {
+        this.emptySpaces = emptySpaces;
     }
 
     public boolean isValid() {
@@ -46,18 +56,23 @@ public class Servlet extends HttpServlet {
         Type listType = new TypeToken<char[][]>() {}.getType();
         char[][] board = new Gson().fromJson(request.getParameter("board"), listType);
 
-        ValidPlayerMove validPlayerMove = new ValidPlayerMove();
-        validPlayerMove.setBoard(board);
+        Type emptySpacesType = new TypeToken<ArrayList<EmptySquare>>() {}.getType();
+        ArrayList<EmptySquare> emptySpaces = new Gson().fromJson(request.getParameter("emptySpaces"), emptySpacesType);
 
-        if(GameEngine.validate(validPlayerMove.getBoard(), clr, row, col, true)) {
-            validPlayerMove.setValid(true);
-            validPlayerMove.getBoard()[row][col] = clr;
+        PlayerMove playerMove = new PlayerMove();
+        playerMove.setBoard(board);
+        playerMove.setEmptySpaces(emptySpaces);
+
+        if(GameEngine.validate(playerMove.getBoard(), clr, row, col, true)) {
+            playerMove.setValid(true);
+            playerMove.getBoard()[row][col] = clr;
+            GameEngine.editEmptyList(new BoardState(board, emptySpaces), new EmptySquare(row, col));
         }
         else{
-            validPlayerMove.setValid(false);
+            playerMove.setValid(false);
         }
 
-        String json = new Gson().toJson(validPlayerMove);
+        String json = new Gson().toJson(playerMove);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

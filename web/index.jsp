@@ -7,6 +7,7 @@
 
     var size = 8;
     var Board = [];
+    var EmptySquares = [];
     var playerTurn = true;
     var playerClr = "B";
 
@@ -19,6 +20,19 @@
     Board[6] = ["_", "_", "_", "_", "_", "_", "_", "_"];
     Board[7] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 
+    EmptySquares[0] = {X: 2, Y: 2};
+    EmptySquares[1] = {X: 2, Y: 3};
+    EmptySquares[2] = {X: 2, Y: 4};
+    EmptySquares[3] = {X: 2, Y: 5};
+    EmptySquares[4] = {X: 3, Y: 5};
+    EmptySquares[5] = {X: 4, Y: 5};
+    EmptySquares[6] = {X: 5, Y: 5};
+    EmptySquares[7] = {X: 5, Y: 4};
+    EmptySquares[8] = {X: 5, Y: 3};
+    EmptySquares[9] = {X: 5, Y: 2};
+    EmptySquares[10] = {X: 4, Y: 2};
+    EmptySquares[11] = {X: 3, Y: 2};
+
     function createBoard() {
 
       var element = $('.board');
@@ -29,11 +43,11 @@
           $('.row' + i + 'col' + j).on("click", function() {
             if(playerTurn) {
               //playerTurn = false;
-              $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), clr: playerClr}, function (responseJson) {
-                if (responseJson.valid) {
-                  updateBoard(responseJson.board);
-                  $.post("ComputerMove", {board: JSON.stringify(Board), clr: playerClr}, function (responseJson) {
-                    //updateBoard(responseJson.board);
+              $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
+                if (responsePlayer.valid) {
+                  updateBoard(responsePlayer.board, responsePlayer.emptySpaces);
+                  $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responseComputer) {
+                    updateBoard(responseComputer.board, responseComputer.emptySpaces);
                     playerTurn = true;
                   });
                 }
@@ -45,8 +59,9 @@
       }
     }
 
-    function updateBoard(board){
+    function updateBoard(board, emptySpaces){
       Board = board;
+      EmptySquares = emptySpaces;
       for (i = 0; i < size; i++){
         for (j = 0; j < size; j++){
           $('.row' + i + 'col' + j).html(board[i][j]);

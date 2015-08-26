@@ -6,18 +6,18 @@
   <script>
 
     var size = 8;
-    var Row = [];
+    var Board = [];
     var playerTurn = true;
     var playerClr = "B";
 
-    Row[0] = ["X", "X", "X", "X", "X", "X", "X", "X"];
-    Row[1] = ["X", "X", "X", "X", "X", "X", "X", "X"];
-    Row[2] = ["X", "X", "X", "X", "X", "X", "X", "X"];
-    Row[3] = ["X", "X", "X", "B", "W", "X", "X", "X"];
-    Row[4] = ["X", "X", "X", "W", "B", "X", "X", "X"];
-    Row[5] = ["X", "X", "X", "X", "X", "X", "X", "X"];
-    Row[6] = ["X", "X", "X", "X", "X", "X", "X", "X"];
-    Row[7] = ["X", "X", "X", "X", "X", "X", "X", "X"];
+    Board[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    Board[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    Board[2] = ["_", "_", "x", "x", "x", "x", "_", "_"];
+    Board[3] = ["_", "_", "x", "W", "B", "x", "_", "_"];
+    Board[4] = ["_", "_", "x", "B", "W", "x", "_", "_"];
+    Board[5] = ["_", "_", "x", "x", "x", "x", "_", "_"];
+    Board[6] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    Board[7] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 
     function createBoard() {
 
@@ -25,15 +25,15 @@
 
       for(i = 0; i < size; i++) {
         for(j = 0; j < size; j++) {
-          $('<span class="row' + i + 'col' + j + '">' + Row[i][j] + '</span>').data('row', i).data('col', j).appendTo(element);
+          $('<span class="row' + i + 'col' + j + '">' + Board[i][j] + '</span>').data('row', i).data('col', j).appendTo(element);
           $('.row' + i + 'col' + j).on("click", function() {
             if(playerTurn) {
-              playerTurn = false;
-              $.post("validPlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), boardState: Row, clr: playerClr}, function (responseJson) {
+              //playerTurn = false;
+              $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), clr: playerClr}, function (responseJson) {
                 if (responseJson.valid) {
-                  updateBoard(responseJson);
-                  $.post("computerMove", {boardState: Row, clr: playerClr}, function (responseJson) {
-                    updateBoard(responseJson);
+                  updateBoard(responseJson.board);
+                  $.post("ComputerMove", {board: JSON.stringify(Board), clr: playerClr}, function (responseJson) {
+                    //updateBoard(responseJson.board);
                     playerTurn = true;
                   });
                 }
@@ -45,8 +45,13 @@
       }
     }
 
-    function updateBoard(coordinates){
-      $('.row' + coordinates.row + 'col' + coordinates.col).html(coordinates.clr);
+    function updateBoard(board){
+      Board = board;
+      for (i = 0; i < size; i++){
+        for (j = 0; j < size; j++){
+          $('.row' + i + 'col' + j).html(board[i][j]);
+        }
+      }
     }
 
     $(function() {

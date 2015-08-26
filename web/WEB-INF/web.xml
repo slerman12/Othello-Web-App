@@ -9,6 +9,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet</servlet-name>
-        <url-pattern>/someservlet/*</url-pattern>
+        <url-pattern>/validPlayerMove/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Servlet2</servlet-name>
+        <servlet-class>Servlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet2</servlet-name>
+        <url-pattern>/computerMove/*</url-pattern>
     </servlet-mapping>
 </web-app>

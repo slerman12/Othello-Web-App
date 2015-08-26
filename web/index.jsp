@@ -7,6 +7,8 @@
 
     var size = 8;
     var Row = [];
+    var playerTurn = true;
+    var playerClr = "B";
 
     Row[0] = ["X", "X", "X", "X", "X", "X", "X", "X"];
     Row[1] = ["X", "X", "X", "X", "X", "X", "X", "X"];
@@ -23,12 +25,23 @@
 
       for(i = 0; i < size; i++) {
         for(j = 0; j < size; j++) {
-          $('<span class="row' + i + 'col' + j + '">' + Row[i][j] + '</span>').data('coordinates', i + " " + j).appendTo(element);
+          $('<span class="row' + i + 'col' + j + '">' + Row[i][j] + '</span>').data('row', i).data('col', j).appendTo(element);
           $('.row' + i + 'col' + j).on("click", function() {
-            alert($.data(this, 'coordinates'));
+            if(playerTurn) {
+              playerTurn = false;
+              $.post("validPlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), boardState: Row, clr: playerClr}, function (responseJson) {
+                if (responseJson.valid) {
+                  updateBoard(responseJson);
+                  $.post("computerMove", {boardState: Row, clr: playerClr}, function (responseJson) {
+                    updateBoard(responseJson);
+                    playerTurn = true;
+                  });
+                }
+              });
+            }
           });
         }
-        $('<br><br>').appendTo(element);
+        $('<br>').appendTo(element);
       }
     }
 
@@ -38,23 +51,12 @@
 
     $(function() {
       createBoard();
-      var object = {row: 7, col: 0, clr: "B"};
-      updateBoard(object);
     });
-
-    //    $(document).on("click", ".board span", function() {  // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-    //      $.get("someservlet", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-    //        var $ul = $("<ul>").appendTo($("#somediv")); // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
-    //        $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-    //          $("<li>").text(item).appendTo($ul);      // Create HTML <li> element, set its text content with currently iterated item and append it to the <ul>.
-    //        });
-    //      });
-    //    });
 
   </script>
   <style>
     .board span {
-      margin-right: 10px;
+      margin-right: 5px;
     }
   </style>
 </head>

@@ -58,6 +58,7 @@
     .board span {
       float: left;
       width: 20px;
+      text-align: center;
     }
   </style>
 </head>

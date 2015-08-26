@@ -1,0 +1,16 @@
+#board {
+    float: left;
+    border: solid 1px black;
+}
+#board div {
+    float: left;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+}
+#board .even {
+    background-color: white;
+}
+#board .odd {
+    background-color: lightblue;
+}

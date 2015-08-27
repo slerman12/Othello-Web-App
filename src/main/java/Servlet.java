@@ -26,10 +26,12 @@ class PlayerMove {
     }
 
     public ArrayList<EmptySquare> getEmptySpaces() {
+
         return emptySpaces;
     }
 
     public void setEmptySpaces(ArrayList<EmptySquare> emptySpaces) {
+
         this.emptySpaces = emptySpaces;
     }
 

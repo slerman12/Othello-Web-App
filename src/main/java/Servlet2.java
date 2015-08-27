@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-class ValidPlayerMove {
+class ComputerMove {
 
     char[][] board;
     ArrayList<EmptySquare> emptySpaces;
@@ -27,26 +27,32 @@ class ValidPlayerMove {
     }
 
     public ArrayList<EmptySquare> getEmptySpaces() {
+
         return emptySpaces;
     }
 
     public void setEmptySpaces(ArrayList<EmptySquare> emptySpaces) {
+
         this.emptySpaces = emptySpaces;
     }
 
     public int getRow() {
+
         return row;
     }
 
     public void setRow(int row) {
+
         this.row = row;
     }
 
     public int getCol() {
+
         return col;
     }
 
     public void setCol(int col) {
+
         this.col = col;
     }
 }
@@ -56,9 +62,9 @@ public class Servlet2 extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int depthLimit = 1;
 
         char clr = request.getParameter("clr").charAt(0);
+        int depthLimit = Integer.parseInt(request.getParameter("difficulty"));
 
         Type boardType = new TypeToken<char[][]>() {}.getType();
         char[][] board = new Gson().fromJson(request.getParameter("board"), boardType);
@@ -70,11 +76,11 @@ public class Servlet2 extends HttpServlet {
 
         GameEngine.bestPlacement(bs, GameEngine.otherPlayer(clr), GameEngine.otherPlayer(clr), 'a', depthLimit, true);
 
-        ValidPlayerMove validPlayerMove = new ValidPlayerMove();
-        validPlayerMove.setBoard(bs.getBoard());
-        validPlayerMove.setEmptySpaces(bs.getEmptySpaces());
+        ComputerMove computerMove = new ComputerMove();
+        computerMove.setBoard(bs.getBoard());
+        computerMove.setEmptySpaces(bs.getEmptySpaces());
 
-        String json = new Gson().toJson(validPlayerMove);
+        String json = new Gson().toJson(computerMove);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

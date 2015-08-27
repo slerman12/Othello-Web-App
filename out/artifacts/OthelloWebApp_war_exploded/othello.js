@@ -3,6 +3,7 @@ var Board = [];
 var EmptySquares = [];
 var playerTurn = true;
 var playerClr = "B";
+var difficulty = 1;
 
 Board[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
@@ -60,7 +61,8 @@ function createBoard() {
                     $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
                         if (responsePlayer.valid) {
                             updateBoard(responsePlayer.board, responsePlayer.emptySpaces);
-                            $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responseComputer) {
+                            alert(difficulty);
+                            $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
                                 updateBoard(responseComputer.board, responseComputer.emptySpaces);
                                 playerTurn = true;
                             });
@@ -93,24 +95,39 @@ function updateBoard(board, emptySpaces){
     }
 }
 
-function configureWidth(){
+function configureWidthHeight(){
     var w = $(window).width();
     var h = $(window).height();
 
     if (w < h) {
-        $('#board').css({'height': 0.9 * w + 'px'});
-        $('#board').css({'width': 0.9 * w + 'px'});
+        $('#board').css({'height': 0.8 * w + 'px'});
+        $('#board').css({'width': 0.8 * w + 'px'});
     }
     else{
-        $('#board').css({'height': 0.9 * h + 'px'});
-        $('#board').css({'width': 0.9 * h + 'px'});
+        $('#board').css({'height': 0.8 * h + 'px'});
+        $('#board').css({'width': 0.8 * h + 'px'});
     }
 }
 
 $(function() {
     createBoard();
-    configureWidth();
+    configureWidthHeight();
     $( window ).resize(function() {
-        configureWidth();
+        configureWidthHeight();
+    });
+    $('#difficulty .easy').on('click', function() {
+        difficulty = 1;
+        $('#difficulty .active').removeClass('active');
+        $('#difficulty .easy').addClass('active');
+    });
+    $('#difficulty .medium').on('click', function() {
+        difficulty = 3;
+        $('#difficulty .active').removeClass('active');
+        $('#difficulty .medium').addClass('active');
+    });
+    $('#difficulty .hard').on('click', function() {
+        difficulty = 6;
+        $('#difficulty .active').removeClass('active');
+        $('#difficulty .hard').addClass('active');
     });
 });

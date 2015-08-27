@@ -8,7 +8,10 @@
 </head>
 <body>
 <div id="board"></div>
-<br>
-<div id="message"></div>
+<div id="difficulty">
+  <button class="easy active">Easy</button>
+  <button class="medium">Medium</button>
+  <button class="hard">Hard</button>
+</div>
 </body>
 </html>

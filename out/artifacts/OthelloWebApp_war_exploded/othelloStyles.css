@@ -15,18 +15,20 @@ body {
     width: 12.5%;
     height: 12.5%;
     text-align: center;
+    cursor: hand;
+    cursor: pointer;
 }
 #board .even {
-    background-color: white;
+    background-color: #9bcff8;
 }
 #board .even:hover{
-    background-color: #efddde;
+    background-color: #0986c1;
 }
 #board .odd {
-    background-color: lightblue;
+    background-color: #0aaeff;
 }
 #board .odd:hover{
-    background-color: lightskyblue;
+    background-color: #0986c1;
 }
 #board div .black {
     width: 80%;
@@ -39,6 +41,34 @@ body {
     width: 80%;
     height: 80%;
     margin: 10%;
-    background-color: grey;
+    background-color: white;
     border-radius: 100%;
+}
+#difficulty{
+    width: auto;
+    display: inline-block;
+    margin: 20px;
+}
+#difficulty button{
+    color: whitesmoke;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    width: 100px;
+    height: 35px;
+    margin: 5px;
+    outline: 0;
+    border: 0;
+    background-color: #323bff;
+}
+#difficulty button:hover{
+    background-color: #2328b0;
+    cursor: hand;
+    cursor: pointer;
+}
+#difficulty .active{
+    border: solid 3px deepskyblue;
+}
+#difficulty .active:hover{
+    background-color: #323bff;
+    cursor: default;
 }

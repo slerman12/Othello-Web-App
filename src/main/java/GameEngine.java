@@ -194,14 +194,14 @@ public class GameEngine {
 
         //everything else is (10 - #of empty adjacent spots) points
         int score = 2; //10;
-        /*if (board[X + 1][Y] == 'x') score--;
+        if (board[X + 1][Y] == 'x') score--;
         if (board[X + 1][Y + 1] == 'x') score--;
         if (board[X][Y + 1] == 'x') score--;
         if (board[X - 1][Y] == 'x') score--;
         if (board[X - 1][Y - 1] == 'x') score--;
         if (board[X][Y - 1] == 'x') score--;
         if (board[X + 1][Y - 1] == 'x') score--;
-        if (board[X - 1][Y + 1] == 'x') score--;*/
+        if (board[X - 1][Y + 1] == 'x') score--;
 
         //!!!READ!!!
         //later, consider the number of valid spaces the opponent has -- minimize those, maximize your own

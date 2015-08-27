@@ -3,12 +3,14 @@ html {
 }
 body {
     height: 100%;
+    text-align: center;
 }
 #board {
     max-width: 1000px;
     max-height: 1000px;
     float: left;
     border: solid 1px black;
+    margin-right: 20px;
 }
 #board div {
     float: left;
@@ -44,21 +46,33 @@ body {
     background-color: white;
     border-radius: 100%;
 }
-#difficulty{
-    width: auto;
-    display: inline-block;
-    margin: 20px;
+#difficulty {
+    float: left;
+    margin: 20px 0;
 }
 #difficulty button{
     color: whitesmoke;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    width: 100px;
-    height: 35px;
     margin: 5px;
     outline: 0;
     border: 0;
     background-color: #323bff;
+}
+@media only screen
+and (min-device-width: 1024px) {
+    #difficulty button{
+        font-size: 14px;
+        width: 100px;
+        height: 35px;
+    }
+}
+@media only screen
+and (max-device-width: 1024px) {
+    #difficulty button{
+        font-size: 28px;
+        width: 250px;
+        height: 80px;
+    }
 }
 #difficulty button:hover{
     background-color: #2328b0;

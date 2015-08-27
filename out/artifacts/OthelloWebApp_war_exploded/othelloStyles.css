@@ -1,18 +1,44 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+}
 #board {
+    max-width: 1000px;
+    max-height: 1000px;
     float: left;
     border: solid 1px black;
 }
 #board div {
-    font-size: 20px;
-    line-height: 25px;
     float: left;
-    width: 25px;
-    height: 25px;
+    width: 12.5%;
+    height: 12.5%;
     text-align: center;
 }
 #board .even {
     background-color: white;
 }
+#board .even:hover{
+    background-color: #efddde;
+}
 #board .odd {
     background-color: lightblue;
+}
+#board .odd:hover{
+    background-color: lightskyblue;
+}
+#board div .black {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    background-color: black;
+    border-radius: 100%;
+}
+#board div .white {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    background-color: grey;
+    border-radius: 100%;
 }

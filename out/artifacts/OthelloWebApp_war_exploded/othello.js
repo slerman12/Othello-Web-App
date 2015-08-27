@@ -34,18 +34,24 @@ function createBoard() {
         for(j = 0; j < size; j++) {
             if((i+j)%2 === 0) {
                 if (Board[i][j] === 'x' || Board[i][j] === '_') {
-                    $('<div class="even row' + i + 'col' + j + '"></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="even row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
-                else {
-                    $('<div class="even row' + i + 'col' + j + '">' + Board[i][j] + '</div>').data('row', i).data('col', j).appendTo(element);
+                else if (Board[i][j] === 'B') {
+                    $('<div class="even row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
+                }
+                else if (Board[i][j] === 'W') {
+                    $('<div class="even row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
             else {
                 if (Board[i][j] === 'x' || Board[i][j] === '_') {
-                    $('<div class="odd row' + i + 'col' + j + '"></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="odd row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
-                else {
-                    $('<div class="odd row' + i + 'col' + j + '">' + Board[i][j] + '</div>').data('row', i).data('col', j).appendTo(element);
+                else if (Board[i][j] === 'B') {
+                    $('<div class="odd row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
+                }
+                else if (Board[i][j] === 'W') {
+                    $('<div class="odd row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
             $('.row' + i + 'col' + j).on("click", function() {
@@ -66,7 +72,6 @@ function createBoard() {
                 }
             });
         }
-        $('<br>').appendTo(element);
     }
 }
 
@@ -76,15 +81,36 @@ function updateBoard(board, emptySpaces){
     for (i = 0; i < size; i++){
         for (j = 0; j < size; j++){
             if(Board[i][j] === 'x' || Board[i][j] === '_') {
-                $('.row' + i + 'col' + j).html("");
+                $('.row' + i + 'col' + j).html('<div class="empty"></div>');
             }
-            else {
-                $('.row' + i + 'col' + j).html(board[i][j]);
+            else if (Board[i][j] === 'B') {
+                $('.row' + i + 'col' + j).html('<div class="black"></div>');
+            }
+            else if (Board[i][j] === 'W') {
+                $('.row' + i + 'col' + j).html('<div class="white"></div>');
             }
         }
     }
 }
 
+function configureWidth(){
+    var w = $(window).width();
+    var h = $(window).height();
+
+    if (w < h) {
+        $('#board').css({'height': 0.9 * w + 'px'});
+        $('#board').css({'width': 0.9 * w + 'px'});
+    }
+    else{
+        $('#board').css({'height': 0.9 * h + 'px'});
+        $('#board').css({'width': 0.9 * h + 'px'});
+    }
+}
+
 $(function() {
     createBoard();
+    configureWidth();
+    $( window ).resize(function() {
+        configureWidth();
+    });
 });

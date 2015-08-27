@@ -61,7 +61,6 @@ function createBoard() {
                     $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
                         if (responsePlayer.valid) {
                             updateBoard(responsePlayer.board, responsePlayer.emptySpaces);
-                            alert(difficulty);
                             $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
                                 updateBoard(responseComputer.board, responseComputer.emptySpaces);
                                 playerTurn = true;

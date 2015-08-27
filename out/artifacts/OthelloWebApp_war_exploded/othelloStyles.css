@@ -65,6 +65,9 @@ and (min-device-width: 1024px) {
         width: 100px;
         height: 35px;
     }
+    #difficulty .active{
+        border: solid 3px #0aaeff;
+    }
 }
 @media only screen
 and (max-device-width: 1024px) {
@@ -73,14 +76,14 @@ and (max-device-width: 1024px) {
         width: 250px;
         height: 80px;
     }
+    #difficulty .active{
+        border: solid 9px #0aaeff;
+    }
 }
 #difficulty button:hover{
     background-color: #2328b0;
     cursor: hand;
     cursor: pointer;
-}
-#difficulty .active{
-    border: solid 3px deepskyblue;
 }
 #difficulty .active:hover{
     background-color: #323bff;

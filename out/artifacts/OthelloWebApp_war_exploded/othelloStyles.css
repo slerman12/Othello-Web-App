@@ -16,7 +16,7 @@
 #othelloBoard div {
     float: left;
     width: 12.5%;
-    height: 12.5%; /*This gets rounded in some browsers and thus displays some padding above the bottom border. The solution would be to make sure that the div height is always a multiple of 8 in othello.js in the function configureWidthHeight().*/
+    height: 12.5%;
     cursor: hand;
     cursor: pointer;
 }

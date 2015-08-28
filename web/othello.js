@@ -102,12 +102,12 @@ function configureWidthHeight(){
     var h = $('#othelloApp').height();
 
     if (w < h) {
-        $('#othelloBoard').css({'height': 0.8 * w + 'px'});
-        $('#othelloBoard').css({'width': 0.8 * w + 'px'});
+        $('#othelloBoard').css({'height': Math.floor(0.8 * w / 8)*8 + 'px'});
+        $('#othelloBoard').css({'width': Math.floor(0.8 * w / 8)*8 + 'px'});
     }
     else{
-        $('#othelloBoard').css({'height': 0.8 * h + 'px'});
-        $('#othelloBoard').css({'width': 0.8 * h + 'px'});
+        $('#othelloBoard').css({'height': Math.floor(0.8 * h / 8)*8 + 'px'});
+        $('#othelloBoard').css({'width': Math.floor(0.8 * h / 8)*8 + 'px'});
     }
 }
 

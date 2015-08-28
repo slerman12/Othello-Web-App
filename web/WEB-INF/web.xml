@@ -19,4 +19,12 @@
         <servlet-name>Servlet2</servlet-name>
         <url-pattern>/ComputerMove/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Servlet3</servlet-name>
+        <servlet-class>Servlet3</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet3</servlet-name>
+        <url-pattern>/SkipTurn/*</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -47,23 +47,23 @@
     display: inline-block;
     vertical-align: top;
 }
-#othelloSettings .start-over {
-    margin: 20px 0;
+#othelloSettings .main {
+    text-align: left;
     display: block;
 }
 #othelloSettings .difficulty {
     display: inline-block;
 }
-#othelloSettings .difficulty button, #othelloSettings .start-over{
+#othelloSettings .difficulty button, #othelloSettings .main button{
     color: whitesmoke;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-right: 10px;
+    margin: 10px 10px 10px 0;
     border: 0;
     background-color: #323bff;
 }
 @media only screen
 and (min-device-width: 1024px) {
-    #othelloSettings .difficulty button, #othelloSettings .start-over{
+    #othelloSettings .difficulty button, #othelloSettings .main button{
         font-size: 14px;
         width: 100px;
         height: 35px;
@@ -74,7 +74,7 @@ and (min-device-width: 1024px) {
 }
 @media only screen
 and (max-device-width: 1024px) {
-    #othelloSettings .difficulty button, #othelloSettings .start-over{
+    #othelloSettings .difficulty button, #othelloSettings .main button{
         font-size: 28px;
         width: 250px;
         height: 80px;
@@ -83,7 +83,7 @@ and (max-device-width: 1024px) {
         border: 9px solid #0aaeff;
     }
 }
-#othelloSettings .difficulty button:hover, #othelloSettings .start-over:hover{
+#othelloSettings .difficulty button:hover, #othelloSettings .main button:hover{
     background-color: #2328b0;
     cursor: hand;
     cursor: pointer;

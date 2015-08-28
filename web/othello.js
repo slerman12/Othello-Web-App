@@ -7,6 +7,7 @@ var difficulty = 1;
 
 var playerMovePromise = null;
 var computerMovePromise = null;
+var skipTurnPromise = null;
 
 Board[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
@@ -64,10 +65,7 @@ function createBoard() {
                     playerMovePromise = $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
                         if (responsePlayer.valid) {
                             updateBoard(responsePlayer.board, responsePlayer.emptySpaces);
-                            computerMovePromise = $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
-                                updateBoard(responseComputer.board, responseComputer.emptySpaces);
-                                playerTurn = true;
-                            });
+                            computerTurn();
                         }
                         else{
                             playerTurn = true;
@@ -138,19 +136,51 @@ function startOver() {
     NewEmptySquares[11] = {X: 3, Y: 2};
 
     updateBoard(NewBoard, NewEmptySquares);
-}
 
-function cancelRequests() {
-    playerMovePromise.abort();
-    computerMovePromise.abort();
-    playerMovePromise = null;
-    computerMovePromise = null;
     if (playerClr === 'B') {
         playerTurn = true;
     }
     else{
-
+        playerTurn = false;
+        computerTurn();
     }
+}
+
+function cancelRequests() {
+
+    if(playerMovePromise) {
+        playerMovePromise.abort();
+        playerMovePromise = null;
+    }
+
+    if(computerMovePromise) {
+        computerMovePromise.abort();
+        computerMovePromise = null;
+    }
+
+    if(skipTurnPromise) {
+        skipTurnPromise.abort();
+        skipTurnPromise = null;
+    }
+}
+
+function computerTurn() {
+    computerMovePromise = $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
+        updateBoard(responseComputer.board, responseComputer.emptySpaces);
+        playerTurn = true;
+    });
+}
+
+function skipTurn(){
+    skipTurnPromise = $.post("SkipTurn", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responseSkipTurn) {
+        if (responseSkipTurn.valid){
+            playerTurn = false;
+            computerTurn();
+        }
+        else {
+            alert("You can only skip a turn when you have no valid moves");
+        }
+    });
 }
 
 $(function() {
@@ -177,8 +207,12 @@ $(function() {
         $('#othelloSettings .difficulty .hard').addClass('active');
     });
 
-    $('#othelloSettings .start-over').on('click', function() {
+    $('#othelloSettings .main .start-over').on('click', function() {
         cancelRequests();
         startOver();
+    });
+
+    $('#othelloSettings .skip-turn').on('click', function() {
+        skipTurn();
     });
 });

@@ -5,6 +5,9 @@ var playerTurn = true;
 var playerClr = "B";
 var difficulty = 1;
 
+var playerMovePromise = null;
+var computerMovePromise = null;
+
 Board[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[2] = ["_", "_", "x", "x", "x", "x", "_", "_"];
@@ -29,7 +32,7 @@ EmptySquares[11] = {X: 3, Y: 2};
 
 function createBoard() {
 
-    var element = $('#board');
+    var element = $('#othelloBoard');
 
     for(i = 0; i < size; i++) {
         for(j = 0; j < size; j++) {
@@ -58,10 +61,10 @@ function createBoard() {
             $('.row' + i + 'col' + j).on("click", function() {
                 if(playerTurn) {
                     playerTurn = false;
-                    $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
+                    playerMovePromise = $.post("PlayerMove", {row: $.data(this, 'row'), col: $.data(this, 'col'), board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responsePlayer) {
                         if (responsePlayer.valid) {
                             updateBoard(responsePlayer.board, responsePlayer.emptySpaces);
-                            $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
+                            computerMovePromise = $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
                                 updateBoard(responseComputer.board, responseComputer.emptySpaces);
                                 playerTurn = true;
                             });
@@ -95,38 +98,87 @@ function updateBoard(board, emptySpaces){
 }
 
 function configureWidthHeight(){
-    var w = $(window).width();
-    var h = $(window).height();
+    var w = $('#othelloApp').width();
+    var h = $('#othelloApp').height();
 
     if (w < h) {
-        $('#board').css({'height': 0.8 * w + 'px'});
-        $('#board').css({'width': 0.8 * w + 'px'});
+        $('#othelloBoard').css({'height': 0.8 * w + 'px'});
+        $('#othelloBoard').css({'width': 0.8 * w + 'px'});
     }
     else{
-        $('#board').css({'height': 0.8 * h + 'px'});
-        $('#board').css({'width': 0.8 * h + 'px'});
+        $('#othelloBoard').css({'height': 0.8 * h + 'px'});
+        $('#othelloBoard').css({'width': 0.8 * h + 'px'});
+    }
+}
+
+function startOver() {
+    var NewBoard = [];
+    var NewEmptySquares = [];
+
+    NewBoard[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    NewBoard[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    NewBoard[2] = ["_", "_", "x", "x", "x", "x", "_", "_"];
+    NewBoard[3] = ["_", "_", "x", "W", "B", "x", "_", "_"];
+    NewBoard[4] = ["_", "_", "x", "B", "W", "x", "_", "_"];
+    NewBoard[5] = ["_", "_", "x", "x", "x", "x", "_", "_"];
+    NewBoard[6] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+    NewBoard[7] = ["_", "_", "_", "_", "_", "_", "_", "_"];
+
+    NewEmptySquares[0] = {X: 2, Y: 2};
+    NewEmptySquares[1] = {X: 2, Y: 3};
+    NewEmptySquares[2] = {X: 2, Y: 4};
+    NewEmptySquares[3] = {X: 2, Y: 5};
+    NewEmptySquares[4] = {X: 3, Y: 5};
+    NewEmptySquares[5] = {X: 4, Y: 5};
+    NewEmptySquares[6] = {X: 5, Y: 5};
+    NewEmptySquares[7] = {X: 5, Y: 4};
+    NewEmptySquares[8] = {X: 5, Y: 3};
+    NewEmptySquares[9] = {X: 5, Y: 2};
+    NewEmptySquares[10] = {X: 4, Y: 2};
+    NewEmptySquares[11] = {X: 3, Y: 2};
+
+    updateBoard(NewBoard, NewEmptySquares);
+}
+
+function cancelRequests() {
+    playerMovePromise.abort();
+    computerMovePromise.abort();
+    playerMovePromise = null;
+    computerMovePromise = null;
+    if (playerClr === 'B') {
+        playerTurn = true;
+    }
+    else{
+
     }
 }
 
 $(function() {
     createBoard();
+
     configureWidthHeight();
     $( window ).resize(function() {
         configureWidthHeight();
     });
-    $('#difficulty .easy').on('click', function() {
+
+    $('#othelloSettings .difficulty .easy').on('click', function() {
         difficulty = 1;
-        $('#difficulty .active').removeClass('active');
-        $('#difficulty .easy').addClass('active');
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .easy').addClass('active');
     });
-    $('#difficulty .medium').on('click', function() {
+    $('#othelloSettings .difficulty .medium').on('click', function() {
         difficulty = 3;
-        $('#difficulty .active').removeClass('active');
-        $('#difficulty .medium').addClass('active');
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .medium').addClass('active');
     });
-    $('#difficulty .hard').on('click', function() {
+    $('#othelloSettings .difficulty .hard').on('click', function() {
         difficulty = 6;
-        $('#difficulty .active').removeClass('active');
-        $('#difficulty .hard').addClass('active');
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .hard').addClass('active');
+    });
+
+    $('#othelloSettings .start-over').on('click', function() {
+        cancelRequests();
+        startOver();
     });
 });

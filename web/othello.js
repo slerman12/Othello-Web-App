@@ -98,8 +98,8 @@ function updateBoard(board, emptySpaces){
 }
 
 function configureWidthHeight(){
-    var w = $(window).width();
-    var h = $(window).height();
+    var w = $('#othelloApp').width();
+    var h = $('#othelloApp').height();
 
     if (w < h) {
         $('#othelloBoard').css({'height': 0.8 * w + 'px'});

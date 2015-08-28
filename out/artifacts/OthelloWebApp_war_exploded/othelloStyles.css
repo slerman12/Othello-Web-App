@@ -1,45 +1,60 @@
-#board {
+#othelloApp {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+#othelloApp .container {
+    display: inline-block;
+}
+#othelloBoard {
     max-width: 1000px;
     max-height: 1000px;
-    float: left;
-    border: solid 1px black;
+    border: 1px solid black;
     margin-right: 20px;
+    display: inline-block;
 }
-#board div {
+#othelloBoard div {
     float: left;
     width: 12.5%;
-    height: 12.5%;
+    height: 12.5%; /*This gets rounded in some browsers and thus displays some padding above the bottom border. The solution would be to make sure that the div height is always a multiple of 8 in othello.js in the function configureWidthHeight().*/
     cursor: hand;
     cursor: pointer;
 }
-#board .even {
+#othelloBoard .even {
     background-color: #9bcff8;
 }
-#board .odd {
+#othelloBoard .odd {
     background-color: #0aaeff;
 }
-#board div:hover {
+#othelloBoard div:hover {
     background-color: #0986c1;
 }
-#board div .black {
+#othelloBoard div .black {
     width: 80%;
     height: 80%;
     margin: 10%;
     background-color: black;
     border-radius: 100%;
 }
-#board div .white {
+#othelloBoard div .white {
     width: 80%;
     height: 80%;
     margin: 10%;
     background-color: white;
     border-radius: 100%;
 }
-#difficulty {
-    float: left;
-    margin: 20px 0;
+#othelloSettings {
+    display: inline-block;
+    vertical-align: top;
 }
-#difficulty button{
+#othelloSettings .start-over {
+    margin: 20px 0;
+    display: block;
+}
+#othelloSettings .difficulty {
+    display: inline-block;
+}
+#othelloSettings .difficulty button, #othelloSettings .start-over{
     color: whitesmoke;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-right: 10px;
@@ -48,32 +63,32 @@
 }
 @media only screen
 and (min-device-width: 1024px) {
-    #difficulty button{
+    #othelloSettings .difficulty button, #othelloSettings .start-over{
         font-size: 14px;
         width: 100px;
         height: 35px;
     }
-    #difficulty .active{
-        border: solid 3px #0aaeff;
+    #othelloSettings .difficulty .active{
+        border: 3px solid #0aaeff;
     }
 }
 @media only screen
 and (max-device-width: 1024px) {
-    #difficulty button{
+    #othelloSettings .difficulty button, #othelloSettings .start-over{
         font-size: 28px;
         width: 250px;
         height: 80px;
     }
-    #difficulty .active{
-        border: solid 9px #0aaeff;
+    #othelloSettings .difficulty .active{
+        border: 9px solid #0aaeff;
     }
 }
-#difficulty button:hover{
+#othelloSettings .difficulty button:hover, #othelloSettings .start-over:hover{
     background-color: #2328b0;
     cursor: hand;
     cursor: pointer;
 }
-#difficulty .active:hover{
+#othelloSettings .difficulty .active:hover{
     background-color: #323bff;
     cursor: default;
 }

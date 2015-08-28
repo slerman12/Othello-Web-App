@@ -178,7 +178,7 @@ function skipTurn(){
             computerTurn();
         }
         else {
-            alert("You can only skip a turn when you have no valid moves");
+            alert("You can only skip a turn when you have no valid moves.");
         }
     });
 }

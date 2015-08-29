@@ -9,6 +9,27 @@ var playerMovePromise = null;
 var computerMovePromise = null;
 var skipTurnPromise = null;
 
+var Notification = (function() {
+    "use strict";
+
+    var elem,
+        hideHandler,
+        that = {};
+
+    that.init = function(options) {
+        elem = $(options.selector);
+    };
+
+    that.show = function(text) {
+        clearTimeout(hideHandler);
+        elem.find("span").html(text);
+        elem.delay(200).fadeIn();
+        hideHandler = setTimeout(function(){elem.fadeOut()}, 4200);
+    };
+
+    return that;
+}());
+
 Board[0] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[1] = ["_", "_", "_", "_", "_", "_", "_", "_"];
 Board[2] = ["_", "_", "x", "x", "x", "x", "_", "_"];
@@ -178,12 +199,15 @@ function skipTurn(){
             computerTurn();
         }
         else {
-            alert("You can only skip a turn when you have no valid moves.");
+            Notification.init({selector: '#othelloSettings .invalid-skip-notification'});
+            Notification.show("You can only skip a turn when you have no valid moves.");
         }
     });
 }
 
 $(function() {
+    $('.notification').hide();
+
     createBoard();
 
     configureWidthHeight();

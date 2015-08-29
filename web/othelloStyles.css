@@ -46,13 +46,24 @@
 #othelloSettings {
     display: inline-block;
     vertical-align: top;
+    width: auto;
 }
-#othelloSettings .main {
+#othelloSettings .notification {
+    padding: 10px 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+#othelloSettings .invalid-skip-notification {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #3a87ad;
+}
+#othelloSettings .main, #othelloSettings .difficulty, #othelloSettings .notification {
     text-align: left;
     display: block;
-}
-#othelloSettings .difficulty {
-    display: inline-block;
 }
 #othelloSettings .difficulty button, #othelloSettings .main button{
     color: whitesmoke;
@@ -71,6 +82,10 @@ and (min-device-width: 1024px) {
     #othelloSettings .difficulty .active{
         border: 3px solid #0aaeff;
     }
+    #othelloSettings .notification {
+        width: 288px;
+        font-size: 16px;
+    }
 }
 @media only screen
 and (max-device-width: 1024px) {
@@ -81,6 +96,10 @@ and (max-device-width: 1024px) {
     }
     #othelloSettings .difficulty .active{
         border: 9px solid #0aaeff;
+    }
+    #othelloSettings .notification {
+        width: 738px;
+        font-size: 38px;
     }
 }
 #othelloSettings .difficulty button:hover, #othelloSettings .main button:hover{

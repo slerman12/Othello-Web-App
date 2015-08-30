@@ -228,8 +228,7 @@ function skipTurn(){
 
 $(function() {
     $('#othelloBoard .notification').hide();
-    $('#othelloBoard .menu').hide();
-    $('#othelloSettings .notification').hide();
+    //$('#othelloBoard .menu').hide();
 
     createBoard();
 

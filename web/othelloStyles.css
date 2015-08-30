@@ -35,6 +35,8 @@
     height: 80%;
     margin: 10%;
     background-color: black;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
     border-radius: 100%;
 }
 #othelloBoard .square .white {
@@ -42,6 +44,8 @@
     height: 80%;
     margin: 10%;
     background-color: white;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
     border-radius: 100%;
 }
 #othelloBoard .notification {
@@ -79,21 +83,63 @@
     cursor: hand;
     cursor: pointer;
 }
-/*#othelloBoard .menu {*/
-    /*position: absolute;*/
-    /*text-align: center;*/
-    /*padding: 10px 20px;*/
-    /*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
-    /*font-size: 16px;*/
-    /*background-color: rgba(217, 237, 247, 0.9);*/
-    /*border: 1px solid #bce8f1;*/
-    /*color: #3a87ad;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*bottom: 0;*/
-    /*margin: auto;*/
-/*}*/
+#othelloBoard .menu {
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    background-color: rgba(217, 237, 247, 0.9);
+    border: 1px solid #bce8f1;
+    color: #3a87ad;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#othelloBoard .menu .choice-container {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+    height: 30%;
+}
+#othelloBoard .menu .choice-container .piece-container {
+    outline: 2px solid black;
+    display: inline-block;
+    width: 45%;
+    height: 90%;
+    cursor: hand;
+    cursor: pointer;
+    background-color: #0aaeff;
+}
+#othelloBoard .menu .choice-container .left {
+    margin-right: -2px;
+}
+#othelloBoard .menu .choice-container .right {
+}
+#othelloBoard .menu .choice-container .piece-container:hover {
+    background-color: #0986c1;
+}
+#othelloBoard .menu .choice-container .piece-container .black-piece {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    background-color: black;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+#othelloBoard .menu .choice-container .piece-container .white-piece {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    background-color: white;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+#othelloBoard .menu .difficulty {
+    margin-right: -10px;
+}
 #othelloSettings {
     display: inline-block;
     vertical-align: top;
@@ -103,7 +149,7 @@
     text-align: left;
     display: block;
 }
-#othelloSettings .difficulty button, #othelloSettings .main button{
+#othelloSettings .difficulty button, #othelloSettings .main button, #othelloBoard .menu .difficulty button{
     color: whitesmoke;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 10px 10px 10px 0;
@@ -112,7 +158,7 @@
 }
 @media only screen
 and (min-device-width: 1024px) {
-    #othelloSettings .difficulty button, #othelloSettings .main button{
+    #othelloSettings .difficulty button, #othelloSettings .main button, #othelloBoard .menu .difficulty button{
         font-size: 14px;
         width: 100px;
         height: 35px;
@@ -140,7 +186,7 @@ and (min-device-width: 1024px) {
 }
 @media only screen
 and (max-device-width: 1024px) {
-    #othelloSettings .difficulty button, #othelloSettings .main button{
+    #othelloSettings .difficulty button, #othelloSettings .main button, #othelloBoard .menu .difficulty button{
         font-size: 28px;
         width: 250px;
         height: 80px;
@@ -166,7 +212,7 @@ and (max-device-width: 1024px) {
         font-size: 65px;
     }
 }
-#othelloSettings .difficulty button:hover, #othelloSettings .main button:hover, #othelloInfo:hover{
+#othelloSettings .difficulty button:hover, #othelloSettings .main button:hover, #othelloInfo:hover, #othelloBoard .menu .difficulty button:hover{
     background-color: #2328b0;
     cursor: hand;
     cursor: pointer;

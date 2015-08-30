@@ -138,7 +138,6 @@
 }
 #othelloBoard .menu .start-game button{
     color: #ffffff;
-    margin: 40px 0 0;
     border: 0;
     background-color: #0aaeff;
     outline: 1px solid black;
@@ -176,7 +175,9 @@ and (min-device-width: 1024px) {
         font-size: 17px;
         width: 230px;
         height: 50px;
+        margin: 40px 0 0;
     }
+
     #othelloSettings .difficulty .active, #othelloBoard .menu .difficulty .active{
         border: 3px solid #0aaeff;
     }
@@ -200,15 +201,21 @@ and (min-device-width: 1024px) {
 }
 @media only screen
 and (max-device-width: 1024px) {
-    #othelloSettings .difficulty button, #othelloSettings .main button, #othelloBoard .menu .difficulty button{
+    #othelloSettings .difficulty button, #othelloSettings .main button{
         font-size: 28px;
         width: 250px;
         height: 80px;
     }
+    #othelloBoard .menu .difficulty button{
+        font-size: 24px;
+        width: 150px;
+        height: 60px;
+    }
     #othelloBoard .menu .start-game button{
-        font-size: 30px;
-        width: 300px;
-        height: 100px;
+        font-size: 28px;
+        width: 250px;
+        height: 80px;
+        margin: 30px 0 0;
     }
     #othelloSettings .difficulty .active, #othelloBoard .menu .difficulty .active{
         border: 9px solid #0aaeff;
@@ -229,6 +236,9 @@ and (max-device-width: 1024px) {
         width: 90px;
         line-height: 90px;
         font-size: 65px;
+    }
+    #othelloBoard .menu h3 {
+        font-size: 38px;
     }
 }
 #othelloSettings .difficulty button:hover, #othelloSettings .main button:hover, #othelloInfo:hover, #othelloBoard .menu .difficulty button:hover{

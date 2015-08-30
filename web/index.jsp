@@ -19,6 +19,7 @@
   <div class="container">
     <div id="othelloBoard">
       <div class="menu">
+        <a class="close">&#10005;</a>
         <h3>Choose your color:</h3>
         <div class="choice-container">
           <div class="piece-container left active">

@@ -67,7 +67,7 @@
     background-color: rgba(217, 237, 247, 0.9);
     color: #3a87ad;
 }
-#othelloBoard .notification .close {
+#othelloBoard .notification .close, #othelloBoard .menu .close {
     float: right;
     font-weight: bold;
     color: #000000;
@@ -76,7 +76,7 @@
     filter: alpha(opacity=20);
     text-decoration: none;
 }
-#othelloBoard .notification .close:hover {
+#othelloBoard .notification .close:hover, #othelloBoard .menu .close:hover {
     color: #000000;
     opacity: 0.4;
     filter: alpha(opacity=40);
@@ -96,6 +96,12 @@
     top: 0;
     bottom: 0;
     overflow: auto;
+}
+#othelloBoard .menu .close{
+    position: absolute;
+    visibility: hidden;
+    top: 10px;
+    right: 10px;
 }
 #othelloBoard .menu .choice-container {
     position: relative;

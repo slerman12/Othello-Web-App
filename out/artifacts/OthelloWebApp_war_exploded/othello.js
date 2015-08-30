@@ -2,6 +2,7 @@ var size = 8;
 var Board = [];
 var EmptySquares = [];
 var playerTurn = false;
+var selectedPlayerClr = "B";
 var playerClr = "B";
 var difficulty = 1;
 
@@ -222,12 +223,12 @@ function skipTurn(){
 
 function menu(){
     $('#othelloBoard .menu .choice-container .left').on('click', function(){
-        playerClr = "B";
+        selectedPlayerClr = "B";
         $('#othelloBoard .menu .choice-container .right').removeClass('active');
         $('#othelloBoard .menu .choice-container .left').addClass('active');
     });
     $('#othelloBoard .menu .choice-container .right').on('click', function(){
-        playerClr = "W";
+        selectedPlayerClr = "W";
         $('#othelloBoard .menu .choice-container .left').removeClass('active');
         $('#othelloBoard .menu .choice-container .right').addClass('active');
     });
@@ -255,7 +256,10 @@ function menu(){
     });
 
     $('#othelloBoard .menu .start-game button').on('click', function(){
-        $('#othelloBoard .menu').hide();
+        playerClr = selectedPlayerClr;
+        cancelRequests();
+        startOver();
+        $('#othelloBoard .menu').fadeOut();
         $('#othelloSettings').css('visibility','visible');
         if (playerClr === "W"){
             computerTurn();
@@ -263,6 +267,10 @@ function menu(){
         else{
             playerTurn = true;
         }
+    });
+    $('#othelloBoard .menu .close').on('click', function() {
+        $('#othelloBoard .menu').fadeOut();
+        $('#othelloSettings').css('visibility','visible');
     });
 }
 
@@ -284,11 +292,10 @@ function settings() {
     });
 
     $('#othelloSettings .main .start-over').on('click', function() {
-        cancelRequests();
-        startOver();
         $('#othelloSettings').css('visibility','hidden');
         Notification.hide();
-        $('#othelloBoard .menu').show();
+        $('#othelloBoard .menu .close').css('visibility','visible');
+        $('#othelloBoard .menu').fadeIn();
     });
 
     $('#othelloSettings .skip-turn').on('click', function() {

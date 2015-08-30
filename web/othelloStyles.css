@@ -56,8 +56,10 @@
     transform: translate(0,-50%);
     text-align: left;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    overflow: scroll;
+    max-height: 80%;
 }
-#othelloBoard .invalid-skip-notification {
+#othelloBoard .default-notification {
     background-color: rgba(217, 237, 247, 0.9);
     color: #3a87ad;
 }
@@ -145,14 +147,14 @@ and (max-device-width: 1024px) {
         font-size: 38px;
         -webkit-border-radius: 30px;
         -moz-border-radius: 30px;
-        border-radius: 14px;
+        border-radius: 30px;
     }
     #othelloBoard .notification .close {
         font: 32px/100% arial, sans-serif;
         margin: 10px -25px 0 2px;
     }
 }
-#othelloSettings .difficulty button:hover, #othelloSettings .main button:hover{
+#othelloSettings .difficulty button:hover, #othelloSettings .main button:hover, #othelloInfo:hover{
     background-color: #2328b0;
     cursor: hand;
     cursor: pointer;
@@ -160,4 +162,21 @@ and (max-device-width: 1024px) {
 #othelloSettings .difficulty .active:hover{
     background-color: #323bff;
     cursor: default;
+}
+#othelloInfo {
+    position: fixed;
+    height: 30px;
+    width: 30px;
+    right: 20px;
+    bottom: 20px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    background-color: #323bff;
+    color: white;
+    line-height: 30px;
+    font-size: 22px;
+}
+#othelloInfo span {
+    font-size: 10%;
 }

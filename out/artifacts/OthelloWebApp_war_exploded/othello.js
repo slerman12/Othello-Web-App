@@ -293,6 +293,7 @@ $(function() {
         cancelRequests();
         startOver();
         $('#othelloSettings').css('visibility','hidden');
+        Notification.hide();
         $('#othelloBoard .menu').show();
     });
 

@@ -20,14 +20,16 @@ var Notification = (function() {
         elem = $(options.selector);
     };
 
-    that.show = function(text, hideSelector, autoHide) {
+    that.show = function(text, hideSelector, autoHide, on) {
         clearTimeout(hideHandler);
         elem.find("span").html(text);
         elem.delay(200).fadeIn();
+        that.on = on;
 
         if (autoHide) {
             hideHandler = setTimeout(function () {
-                elem.fadeOut()
+                elem.fadeOut();
+                that.on = "off";
             }, 4200);
         }
 
@@ -35,8 +37,15 @@ var Notification = (function() {
             $(hideSelector).on('click', function () {
                 clearTimeout(hideHandler);
                 elem.fadeOut();
+                that.on = "off";
             })
         }
+    };
+
+    that.hide = function() {
+        clearTimeout(hideHandler);
+        elem.fadeOut();
+        that.on = false;
     };
 
     return that;
@@ -212,7 +221,7 @@ function skipTurn(){
         }
         else {
             Notification.init({selector: '#othelloBoard .default-notification'});
-            Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true);
+            Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true, "skip-turn");
         }
     });
 }
@@ -255,7 +264,12 @@ $(function() {
     });
 
     $('#othelloInfo').on('click', function() {
-        Notification.init({selector: '#othelloBoard .default-notification'});
-        Notification.show("This is a web-based Othello board game that works natively in all browsers and on all devices. The AI for the game is run on a custom Java servlet. It uses alpha beta pruning to decide a best move and looks ahead a configurable depth (Easy: depth = 1, Medium: depth = 3, Hard: depth = 6). The GUI is fully responsive and implemented entirely with Javascript and CSS. This was primarily created by Sam Lerman, who set up the backend, created this entire website and GUI, and made most of the game engine. The AI for the game was created by Sam Lerman, Daniel Harris, and Charlie Norvell collaboratively for a university project.", '#othelloBoard .default-notification .close', false);
+        if(Notification.on === "info"){
+            Notification.hide();
+        }
+        else {
+            Notification.init({selector: '#othelloBoard .default-notification'});
+            Notification.show("This is a web-based Othello board game that works natively in all browsers and on all devices. The AI for the game is run on a custom Java servlet. It uses alpha beta pruning to decide a best move and looks ahead a configurable depth (Easy: depth = 1, Medium: depth = 3, Hard: depth = 6). The GUI is fully responsive and implemented entirely with Javascript and CSS. This was primarily created by Sam Lerman, who set up the backend, created this entire website and GUI, and made most of the game engine. The AI for the game was created by Sam Lerman, Daniel Harris, and Charlie Norvell collaboratively for a university project.", '#othelloBoard .default-notification .close', false, "info");
+        }
     });
 });

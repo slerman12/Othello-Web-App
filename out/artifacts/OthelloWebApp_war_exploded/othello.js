@@ -212,7 +212,7 @@ function skipTurn(){
         }
         else {
             Notification.init({selector: '#othelloBoard .default-notification'});
-            Notification.show("You can only skip a turn when you have no valid moves.", '#othelloBoard .default-notification .close', true);
+            Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true);
         }
     });
 }

@@ -17,13 +17,16 @@
 <body>
 <div id="othelloApp">
   <div class="container">
-    <div id="othelloBoard"></div>
+    <div id="othelloBoard">
+      <%--<div class="menu"><span></span></div>--%>
+      <div class="notification invalid-skip-notification"><a class="close">&#10005;</a><span></span></div>
+    </div>
     <div id="othelloSettings">
       <div class="main">
         <button class="start-over">Start Over</button>
         <button class="skip-turn">Skip Turn</button>
       </div>
-      <div class="notification invalid-skip-notification"><span></span></div>
+      <%--<div class="notification invalid-skip-notification"><span></span></div>--%>
       <div class="difficulty">
         <button class="easy active">Easy</button>
         <button class="medium">Medium</button>

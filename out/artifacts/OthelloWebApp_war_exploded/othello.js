@@ -2,7 +2,7 @@ var size = 8;
 var Board = [];
 var EmptySquares = [];
 var playerTurn = false;
-var playerClr = null;
+var playerClr = "B";
 var difficulty = 1;
 
 var playerMovePromise = null;
@@ -256,19 +256,13 @@ $(function() {
     });
 
     $('#othelloBoard .menu .start-game button').on('click', function(){
-        if (playerClr){
-            $('#othelloBoard .menu').hide();
-            $('#othelloSettings').css('visibility','visible');
-            if (playerClr === "W"){
-                computerTurn();
-            }
-            else{
-                playerTurn = true;
-            }
+        $('#othelloBoard .menu').hide();
+        $('#othelloSettings').css('visibility','visible');
+        if (playerClr === "W"){
+            computerTurn();
         }
-        else {
-            Notification.init({selector: '#othelloBoard .default-notification'});
-            Notification.show("Please select a color.", '#othelloBoard .default-notification .close', true, "color");
+        else{
+            playerTurn = true;
         }
     });
 

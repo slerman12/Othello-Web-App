@@ -21,7 +21,7 @@
       <div class="menu">
         <h3>Choose your color:</h3>
         <div class="choice-container">
-          <div class="piece-container left">
+          <div class="piece-container left active">
             <div class="black-piece"></div>
           </div>
           <div class="piece-container right">

@@ -220,10 +220,7 @@ function skipTurn(){
     });
 }
 
-$(function() {
-    $('#othelloBoard .notification').hide();
-    $('#othelloSettings').css('visibility','hidden');
-
+function menu(){
     $('#othelloBoard .menu .choice-container .left').on('click', function(){
         playerClr = "B";
         $('#othelloBoard .menu .choice-container .right').removeClass('active');
@@ -267,14 +264,9 @@ $(function() {
             playerTurn = true;
         }
     });
+}
 
-    createBoard();
-
-    configureWidthHeight();
-    $( window ).resize(function() {
-        configureWidthHeight();
-    });
-
+function settings() {
     $('#othelloSettings .difficulty .easy').on('click', function() {
         difficulty = 1;
         $('#othelloSettings .difficulty .active').removeClass('active');
@@ -301,6 +293,20 @@ $(function() {
 
     $('#othelloSettings .skip-turn').on('click', function() {
         skipTurn();
+    });
+}
+
+$(function() {
+    $('#othelloBoard .notification').hide();
+    $('#othelloSettings').css('visibility','hidden');
+
+    menu();
+    createBoard();
+    settings();
+
+    configureWidthHeight();
+    $( window ).resize(function() {
+        configureWidthHeight();
     });
 
     $('#othelloInfo').on('click', function() {

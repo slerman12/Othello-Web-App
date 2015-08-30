@@ -34,6 +34,9 @@
           <button class="medium">Medium</button>
           <button class="hard">Hard</button>
         </div>
+        <div class="start-game">
+          <button>Start Game</button>
+        </div>
       </div>
       <div class="notification default-notification"><a class="close">&#10005;</a><span></span></div>
     </div>

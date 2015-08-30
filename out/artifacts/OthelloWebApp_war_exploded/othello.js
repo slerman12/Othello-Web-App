@@ -1,8 +1,8 @@
 var size = 8;
 var Board = [];
 var EmptySquares = [];
-var playerTurn = true;
-var playerClr = "B";
+var playerTurn = false;
+var playerClr = null;
 var difficulty = 1;
 
 var playerMovePromise = null;
@@ -178,14 +178,6 @@ function startOver() {
     NewEmptySquares[11] = {X: 3, Y: 2};
 
     updateBoard(NewBoard, NewEmptySquares);
-
-    if (playerClr === 'B') {
-        playerTurn = true;
-    }
-    else{
-        playerTurn = false;
-        computerTurn();
-    }
 }
 
 function cancelRequests() {
@@ -228,8 +220,57 @@ function skipTurn(){
 
 $(function() {
     $('#othelloBoard .notification').hide();
-    $('#othelloBoard .menu').hide();
-    $('#othelloSettings .notification').hide();
+    $('#othelloSettings').css('visibility','hidden');
+
+    $('#othelloBoard .menu .choice-container .left').on('click', function(){
+        playerClr = "B";
+        $('#othelloBoard .menu .choice-container .right').removeClass('active');
+        $('#othelloBoard .menu .choice-container .left').addClass('active');
+    });
+    $('#othelloBoard .menu .choice-container .right').on('click', function(){
+        playerClr = "W";
+        $('#othelloBoard .menu .choice-container .left').removeClass('active');
+        $('#othelloBoard .menu .choice-container .right').addClass('active');
+    });
+
+    $('#othelloBoard .menu .difficulty .easy').on('click', function() {
+        difficulty = 1;
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .easy').addClass('active');
+        $('#othelloBoard .menu .difficulty .active').removeClass('active');
+        $('#othelloBoard .menu .difficulty .easy').addClass('active');
+    });
+    $('#othelloBoard .menu .difficulty .medium').on('click', function() {
+        difficulty = 3;
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .medium').addClass('active');
+        $('#othelloBoard .menu .difficulty .active').removeClass('active');
+        $('#othelloBoard .menu .difficulty .medium').addClass('active');
+    });
+    $('#othelloBoard .menu .difficulty .hard').on('click', function() {
+        difficulty = 6;
+        $('#othelloSettings .difficulty .active').removeClass('active');
+        $('#othelloSettings .difficulty .hard').addClass('active');
+        $('#othelloBoard .menu .difficulty .active').removeClass('active');
+        $('#othelloBoard .menu .difficulty .hard').addClass('active');
+    });
+
+    $('#othelloBoard .menu .start-game button').on('click', function(){
+        if (playerClr){
+            $('#othelloBoard .menu').hide();
+            $('#othelloSettings').css('visibility','visible');
+            if (playerClr === "W"){
+                computerTurn();
+            }
+            else{
+                playerTurn = true;
+            }
+        }
+        else {
+            Notification.init({selector: '#othelloBoard .default-notification'});
+            Notification.show("Please select a color.", '#othelloBoard .default-notification .close', true, "color");
+        }
+    });
 
     createBoard();
 
@@ -257,6 +298,8 @@ $(function() {
     $('#othelloSettings .main .start-over').on('click', function() {
         cancelRequests();
         startOver();
+        $('#othelloSettings').css('visibility','hidden');
+        $('#othelloBoard .menu').show();
     });
 
     $('#othelloSettings .skip-turn').on('click', function() {

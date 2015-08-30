@@ -114,7 +114,8 @@
 #othelloBoard .menu .choice-container .left {
     margin-right: -2px;
 }
-#othelloBoard .menu .choice-container .right {
+#othelloBoard .menu .choice-container .active {
+    background-color: #0986c1;
 }
 #othelloBoard .menu .choice-container .piece-container:hover {
     background-color: #0986c1;
@@ -137,8 +138,18 @@
     -moz-border-radius: 100%;
     border-radius: 100%;
 }
-#othelloBoard .menu .difficulty {
-    margin-right: -10px;
+#othelloBoard .menu .start-game button{
+    color: #ffffff;
+    margin: 40px 0 0;
+    border: 0;
+    background-color: #0aaeff;
+    outline: 1px solid black;
+    text-shadow: 0 1px 0 rgb(0, 0, 0);
+}
+#othelloBoard .menu .start-game button:hover{
+    background-color: #0986c1;
+    cursor: hand;
+    cursor: pointer;
 }
 #othelloSettings {
     display: inline-block;
@@ -163,7 +174,12 @@ and (min-device-width: 1024px) {
         width: 100px;
         height: 35px;
     }
-    #othelloSettings .difficulty .active{
+    #othelloBoard .menu .start-game button{
+        font-size: 17px;
+        width: 230px;
+        height: 50px;
+    }
+    #othelloSettings .difficulty .active, #othelloBoard .menu .difficulty .active{
         border: 3px solid #0aaeff;
     }
     #othelloBoard .notification {
@@ -191,7 +207,12 @@ and (max-device-width: 1024px) {
         width: 250px;
         height: 80px;
     }
-    #othelloSettings .difficulty .active{
+    #othelloBoard .menu .start-game button{
+        font-size: 30px;
+        width: 300px;
+        height: 100px;
+    }
+    #othelloSettings .difficulty .active, #othelloBoard .menu .difficulty .active{
         border: 9px solid #0aaeff;
     }
     #othelloBoard .notification {
@@ -217,7 +238,7 @@ and (max-device-width: 1024px) {
     cursor: hand;
     cursor: pointer;
 }
-#othelloSettings .difficulty .active:hover{
+#othelloSettings .difficulty .active:hover, #othelloBoard .menu .difficulty .active:hover{
     background-color: #323bff;
     cursor: default;
 }

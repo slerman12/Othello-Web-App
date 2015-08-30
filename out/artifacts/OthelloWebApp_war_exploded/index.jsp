@@ -18,7 +18,26 @@
 <div id="othelloApp">
   <div class="container">
     <div id="othelloBoard">
-      <%--<div class="menu"><span></span></div>--%>
+      <div class="menu">
+        <h3>Choose your color:</h3>
+        <div class="choice-container">
+          <div class="piece-container left">
+            <div class="black-piece"></div>
+          </div>
+          <div class="piece-container right">
+            <div class="white-piece"></div>
+          </div>
+        </div>
+        <h3>Choose a difficulty:</h3>
+        <div class="difficulty">
+          <button class="easy active">Easy</button>
+          <button class="medium">Medium</button>
+          <button class="hard">Hard</button>
+        </div>
+        <div class="start-game">
+          <button>Start Game</button>
+        </div>
+      </div>
       <div class="notification default-notification"><a class="close">&#10005;</a><span></span></div>
     </div>
     <div id="othelloSettings">
@@ -31,6 +50,21 @@
         <button class="medium">Medium</button>
         <button class="hard">Hard</button>
       </div>
+      <%--<div class="stats">--%>
+      <%--<h3>Choose your color:</h3>--%>
+      <%--<div class="choice-container">--%>
+      <%--<div class="piece-container">--%>
+      <%--<div class="black-piece"></div>--%>
+      <%--</div>--%>
+      <%--<div class="text"></div>--%>
+      <%--</div>--%>
+      <%--<div class="choice-container">--%>
+      <%--<div class="piece-container">--%>
+      <%--<div class="white-piece"></div>--%>
+      <%--</div>--%>
+      <%--<div class="text"></div>--%>
+      <%--</div>--%>
+      <%--</div>--%>
     </div>
     <div id="othelloInfo"><strong>i</strong></div>
   </div>

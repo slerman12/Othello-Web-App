@@ -43,9 +43,11 @@ var Notification = (function() {
     };
 
     that.hide = function() {
-        clearTimeout(hideHandler);
-        elem.fadeOut();
-        that.on = false;
+        if(that.on && (that.on !== "off")){
+            clearTimeout(hideHandler);
+            elem.fadeOut();
+            that.on = "off";
+        }
     };
 
     return that;

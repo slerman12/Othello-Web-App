@@ -95,6 +95,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    overflow: auto;
 }
 #othelloBoard .menu .choice-container {
     position: relative;
@@ -114,10 +115,7 @@
 #othelloBoard .menu .choice-container .left {
     margin-right: -2px;
 }
-#othelloBoard .menu .choice-container .active {
-    background-color: #0986c1;
-}
-#othelloBoard .menu .choice-container .piece-container:hover {
+#othelloBoard .menu .choice-container .active, #othelloBoard .menu .choice-container .piece-container:hover  {
     background-color: #0986c1;
 }
 #othelloBoard .menu .choice-container .piece-container .black-piece {

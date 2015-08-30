@@ -131,6 +131,12 @@ and (min-device-width: 1024px) {
         font: 16px/100% arial, sans-serif;
         margin: 0 -25px 0 2px;
     }
+    #othelloInfo {
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        font-size: 22px;
+    }
 }
 @media only screen
 and (max-device-width: 1024px) {
@@ -153,6 +159,12 @@ and (max-device-width: 1024px) {
         font: 32px/100% arial, sans-serif;
         margin: 10px -25px 0 2px;
     }
+    #othelloInfo {
+        height: 90px;
+        width: 90px;
+        line-height: 90px;
+        font-size: 65px;
+    }
 }
 #othelloSettings .difficulty button:hover, #othelloSettings .main button:hover, #othelloInfo:hover{
     background-color: #2328b0;
@@ -165,8 +177,6 @@ and (max-device-width: 1024px) {
 }
 #othelloInfo {
     position: fixed;
-    height: 30px;
-    width: 30px;
     right: 20px;
     bottom: 20px;
     -webkit-border-radius: 100%;
@@ -174,9 +184,4 @@ and (max-device-width: 1024px) {
     border-radius: 100%;
     background-color: #323bff;
     color: white;
-    line-height: 30px;
-    font-size: 22px;
-}
-#othelloInfo span {
-    font-size: 10%;
 }

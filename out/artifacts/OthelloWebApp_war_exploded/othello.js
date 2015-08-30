@@ -20,11 +20,18 @@ var Notification = (function() {
         elem = $(options.selector);
     };
 
-    that.show = function(text) {
+    that.show = function(text, hide) {
         clearTimeout(hideHandler);
         elem.find("span").html(text);
         elem.delay(200).fadeIn();
         hideHandler = setTimeout(function(){elem.fadeOut()}, 4200);
+
+        if(hide) {
+            $(hide).on('click', function () {
+                clearTimeout(hideHandler);
+                elem.fadeOut();
+            })
+        }
     };
 
     return that;
@@ -60,24 +67,24 @@ function createBoard() {
         for(j = 0; j < size; j++) {
             if((i+j)%2 === 0) {
                 if (Board[i][j] === 'x' || Board[i][j] === '_') {
-                    $('<div class="even row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square even row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'B') {
-                    $('<div class="even row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square even row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'W') {
-                    $('<div class="even row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square even row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
             else {
                 if (Board[i][j] === 'x' || Board[i][j] === '_') {
-                    $('<div class="odd row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square odd row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'B') {
-                    $('<div class="odd row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square odd row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'W') {
-                    $('<div class="odd row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
+                    $('<div class="square odd row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
             $('.row' + i + 'col' + j).on("click", function() {
@@ -199,14 +206,16 @@ function skipTurn(){
             computerTurn();
         }
         else {
-            Notification.init({selector: '#othelloSettings .invalid-skip-notification'});
-            Notification.show("You can only skip a turn when you have no valid moves.");
+            Notification.init({selector: '#othelloBoard .invalid-skip-notification'});
+            Notification.show("You can only skip a turn when you have no valid moves.", '#othelloBoard .invalid-skip-notification .close');
         }
     });
 }
 
 $(function() {
-    $('.notification').hide();
+    $('#othelloBoard .notification').hide();
+    $('#othelloBoard .menu').hide();
+    $('#othelloSettings .notification').hide();
 
     createBoard();
 

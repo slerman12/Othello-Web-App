@@ -247,7 +247,6 @@ function skipTurn(){
         }, function (responseSkipTurn) {
             if (responseSkipTurn.valid) {
                 playerTurn = false;
-                switchTurn();
                 computerTurn();
             }
             else {

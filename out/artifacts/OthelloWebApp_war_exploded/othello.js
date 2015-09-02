@@ -226,21 +226,36 @@ function computerTurn() {
         updateBoard(responseComputer.board, responseComputer.emptySpaces);
         playerTurn = true;
         switchTurn();
+        if(responseComputer.gameOver){
+            Notification.init({selector: '#othelloBoard .default-notification'});
+            if((playerClr === "B" && blackScr > whiteScr) || (playerClr === "W" && whiteScr > blackScr)) {
+                Notification.show("<strong>You win!</strong> ", '#othelloBoard .default-notification .close', false, "info");
+            }
+            else{
+                Notification.show("<strong>Sorry, computer wins. Better luck next time!</strong> ", '#othelloBoard .default-notification .close', false, "info");
+            }
+        }
     });
 }
 
 function skipTurn(){
-    skipTurnPromise = $.post("SkipTurn", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responseSkipTurn) {
-        if (responseSkipTurn.valid){
-            playerTurn = false;
-            switchTurn();
-            computerTurn();
-        }
-        else {
-            Notification.init({selector: '#othelloBoard .default-notification'});
-            Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true, "skip-turn");
-        }
-    });
+    if(playerTurn) {
+        skipTurnPromise = $.post("SkipTurn", {
+            board: JSON.stringify(Board),
+            emptySpaces: JSON.stringify(EmptySquares),
+            clr: playerClr
+        }, function (responseSkipTurn) {
+            if (responseSkipTurn.valid) {
+                playerTurn = false;
+                switchTurn();
+                computerTurn();
+            }
+            else {
+                Notification.init({selector: '#othelloBoard .default-notification'});
+                Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true, "skip-turn");
+            }
+        });
+    }
 }
 
 function switchTurn() {

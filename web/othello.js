@@ -226,6 +226,15 @@ function computerTurn() {
         updateBoard(responseComputer.board, responseComputer.emptySpaces);
         playerTurn = true;
         switchTurn();
+        if(responseComputer.gameOver){
+            Notification.init({selector: '#othelloBoard .default-notification'});
+            if((playerClr === "B" && blackScr > whiteScr) || (playerClr === "W" && whiteScr > blackScr)) {
+                Notification.show("<strong>You win!</strong> ", '#othelloBoard .default-notification .close', false, "info");
+            }
+            else{
+                Notification.show("<strong>Sorry, computer wins. Better luck next time!</strong> ", '#othelloBoard .default-notification .close', false, "info");
+            }
+        }
     });
 }
 

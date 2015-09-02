@@ -15,6 +15,7 @@ class ComputerMove {
     ArrayList<EmptySquare> emptySpaces;
     int row;
     int col;
+    boolean gameOver;
 
     public char[][] getBoard() {
 
@@ -55,6 +56,16 @@ class ComputerMove {
 
         this.col = col;
     }
+
+    public boolean isGameOver() {
+
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+
+        this.gameOver = gameOver;
+    }
 }
 
 @WebServlet(name = "Servlet2")
@@ -79,6 +90,7 @@ public class Servlet2 extends HttpServlet {
         ComputerMove computerMove = new ComputerMove();
         computerMove.setBoard(bs.getBoard());
         computerMove.setEmptySpaces(bs.getEmptySpaces());
+        computerMove.setGameOver(GameEngine.noValidMoves(bs, 'B') && GameEngine.noValidMoves(bs, 'W'));
 
         String json = new Gson().toJson(computerMove);
 

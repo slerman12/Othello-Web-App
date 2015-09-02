@@ -64,6 +64,7 @@
     max-height: 80%;
 }
 #othelloBoard .default-notification {
+    z-index: 3;
     background-color: rgba(217, 237, 247, 0.9);
     color: #3a87ad;
 }
@@ -323,6 +324,7 @@ and (max-device-width: 1024px) {
     line-height: 40px;
 }
 #othelloInfo {
+    z-index: 3;
     position: fixed;
     right: 20px;
     bottom: 20px;

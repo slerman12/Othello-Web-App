@@ -5,6 +5,9 @@ var playerTurn = false;
 var selectedPlayerClr = "B";
 var playerClr = "B";
 var difficulty = 1;
+var blackScr = 0;
+var whiteScr = 0;
+var scrTimeout = null;
 
 var playerMovePromise = null;
 var computerMovePromise = null;
@@ -87,9 +90,11 @@ function createBoard() {
                     $('<div class="square even row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'B') {
+                    blackScr++;
                     $('<div class="square even row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'W') {
+                    whiteScr++;
                     $('<div class="square even row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
@@ -98,12 +103,15 @@ function createBoard() {
                     $('<div class="square odd row' + i + 'col' + j + '"><div class="empty"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'B') {
+                    blackScr++;
                     $('<div class="square odd row' + i + 'col' + j + '"><div class="black"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
                 else if (Board[i][j] === 'W') {
+                    whiteScr++;
                     $('<div class="square odd row' + i + 'col' + j + '"><div class="white"></div></div>').data('row', i).data('col', j).appendTo(element);
                 }
             }
+
             $('.row' + i + 'col' + j).on("click", function() {
                 if(playerTurn) {
                     playerTurn = false;
@@ -120,9 +128,13 @@ function createBoard() {
             });
         }
     }
+    $('#othelloSettings .choice-container .left .score .text').html(blackScr);
+    $('#othelloSettings .choice-container .right .score .text').html(whiteScr);
 }
 
 function updateBoard(board, emptySpaces){
+    blackScr = 0;
+    whiteScr = 0;
     Board = board;
     EmptySquares = emptySpaces;
     for (i = 0; i < size; i++){
@@ -131,13 +143,20 @@ function updateBoard(board, emptySpaces){
                 $('.row' + i + 'col' + j).html('<div class="empty"></div>');
             }
             else if (Board[i][j] === 'B') {
+                blackScr++;
                 $('.row' + i + 'col' + j).html('<div class="black"></div>');
             }
             else if (Board[i][j] === 'W') {
+                whiteScr++;
                 $('.row' + i + 'col' + j).html('<div class="white"></div>');
             }
         }
     }
+    clearTimeout(scrTimeout);
+    scrTimeout = setTimeout(function(){
+        $('#othelloSettings .choice-container .left .score .text').html(blackScr);
+        $('#othelloSettings .choice-container .right .score .text').html(whiteScr);
+    }, 200);
 }
 
 function configureWidthHeight(){
@@ -202,9 +221,11 @@ function cancelRequests() {
 }
 
 function computerTurn() {
+    switchTurn();
     computerMovePromise = $.post("ComputerMove", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr, difficulty: difficulty}, function (responseComputer) {
         updateBoard(responseComputer.board, responseComputer.emptySpaces);
         playerTurn = true;
+        switchTurn();
     });
 }
 
@@ -212,6 +233,7 @@ function skipTurn(){
     skipTurnPromise = $.post("SkipTurn", {board: JSON.stringify(Board), emptySpaces: JSON.stringify(EmptySquares), clr: playerClr}, function (responseSkipTurn) {
         if (responseSkipTurn.valid){
             playerTurn = false;
+            switchTurn();
             computerTurn();
         }
         else {
@@ -219,6 +241,17 @@ function skipTurn(){
             Notification.show("You can only skip a turn when you have no valid move.", '#othelloBoard .default-notification .close', true, "skip-turn");
         }
     });
+}
+
+function switchTurn() {
+    if($('#othelloSettings .choice-container .right').hasClass('active')){
+        $('#othelloSettings .choice-container .right').removeClass('active');
+        $('#othelloSettings .choice-container .left').addClass('active');
+    }
+    else{
+        $('#othelloSettings .choice-container .left').removeClass('active');
+        $('#othelloSettings .choice-container .right').addClass('active');
+    }
 }
 
 function menu(){
@@ -259,14 +292,18 @@ function menu(){
         playerClr = selectedPlayerClr;
         cancelRequests();
         startOver();
-        $('#othelloBoard .menu').fadeOut();
-        $('#othelloSettings').css('visibility','visible');
+        $('#othelloSettings .choice-container .active').removeClass('active');
+        $('#othelloSettings .choice-container .left').addClass('active');
         if (playerClr === "W"){
+            $('#othelloSettings .choice-container .right').addClass('active');
             computerTurn();
         }
         else{
+            $('#othelloSettings .choice-container .left').addClass('active');
             playerTurn = true;
         }
+        $('#othelloBoard .menu').fadeOut();
+        $('#othelloSettings').css('visibility','visible');
     });
     $('#othelloBoard .menu .close').on('click', function() {
         $('#othelloBoard .menu').fadeOut();

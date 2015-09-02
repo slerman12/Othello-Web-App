@@ -23,10 +23,10 @@
         <h3>Choose your color:</h3>
         <div class="choice-container">
           <div class="piece-container left active">
-            <div class="black-piece"></div>
+            <div class="piece black-piece"></div>
           </div>
           <div class="piece-container right">
-            <div class="white-piece"></div>
+            <div class="piece white-piece"></div>
           </div>
         </div>
         <h3>Choose a difficulty:</h3>
@@ -42,6 +42,20 @@
       <div class="notification default-notification"><a class="close">&#10005;</a><span></span></div>
     </div>
     <div id="othelloSettings">
+      <div class="choice-container">
+        <div class="stats-container left">
+          <div class="piece-container">
+            <div class="piece"><div class="player"></div></div>
+          </div>
+          <div class = "left-score score"><div class="text"></div></div>
+        </div>
+        <div class="stats-container right">
+          <div class="piece-container">
+            <div class="piece"><div class="player"></div></div>
+          </div>
+          <div class = "score"><div class="text"></div></div>
+        </div>
+      </div>
       <div class="main">
         <button class="start-over">Start Over</button>
         <button class="skip-turn">Skip Turn</button>
@@ -51,21 +65,6 @@
         <button class="medium">Medium</button>
         <button class="hard">Hard</button>
       </div>
-      <%--<div class="stats">--%>
-      <%--<h3>Choose your color:</h3>--%>
-      <%--<div class="choice-container">--%>
-      <%--<div class="piece-container">--%>
-      <%--<div class="black-piece"></div>--%>
-      <%--</div>--%>
-      <%--<div class="text"></div>--%>
-      <%--</div>--%>
-      <%--<div class="choice-container">--%>
-      <%--<div class="piece-container">--%>
-      <%--<div class="white-piece"></div>--%>
-      <%--</div>--%>
-      <%--<div class="text"></div>--%>
-      <%--</div>--%>
-      <%--</div>--%>
     </div>
     <div id="othelloInfo"><strong>i</strong></div>
   </div>

@@ -110,6 +110,7 @@
     height: 30%;
 }
 #othelloBoard .menu .choice-container .piece-container {
+    position: relative;
     outline: 2px solid black;
     display: inline-block;
     width: 45%;
@@ -121,26 +122,26 @@
 #othelloBoard .menu .choice-container .left {
     margin-right: -2px;
 }
-#othelloBoard .menu .choice-container .active, #othelloBoard .menu .choice-container .piece-container:hover  {
+#othelloBoard .menu .choice-container .piece-container:hover  {
     background-color: #0986c1;
 }
-#othelloBoard .menu .choice-container .piece-container .black-piece {
+#othelloBoard .menu .choice-container .active {
+    z-index: 1;
+    outline: 2px solid red;
+}
+#othelloBoard .menu .choice-container .piece-container .piece {
     width: 80%;
     height: 80%;
     margin: 10%;
-    background-color: black;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;
 }
+#othelloBoard .menu .choice-container .piece-container .black-piece {
+    background-color: black;
+}
 #othelloBoard .menu .choice-container .piece-container .white-piece {
-    width: 80%;
-    height: 80%;
-    margin: 10%;
     background-color: white;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
 }
 #othelloBoard .menu .start-game button{
     color: #ffffff;
@@ -156,6 +157,7 @@
 }
 #othelloSettings {
     display: inline-block;
+    text-align: left;
     vertical-align: top;
     width: auto;
 }
@@ -261,6 +263,64 @@ and (max-device-width: 1024px) {
 #othelloSettings .difficulty .active:hover, #othelloBoard .menu .difficulty .active:hover{
     background-color: #323bff;
     cursor: default;
+}
+#othelloSettings .choice-container {
+    position: relative;
+    display: block;
+    width: 328px;
+    height: 169px;
+    margin: 12px 0 10px 0;
+}
+#othelloSettings .choice-container .stats-container {
+    position: relative;
+    width: 162px;
+    height: 162px;
+    display: inline-block;
+    margin-right: -2px;
+}
+#othelloSettings .choice-container .stats-container .piece-container {
+    position: relative;
+    vertical-align: top;
+    outline: 2px solid black;
+    width: 100%;
+    height: 75%;
+    background-color: #0aaeff;
+}
+#othelloSettings .choice-container .stats-container .piece-container .piece {
+    display: inline-block;
+    width: 60%;
+    height: 80%;
+    margin: 7% 20%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+#othelloSettings .choice-container .left .piece-container .piece {
+    background-color: black;
+}
+#othelloSettings .choice-container .right .piece-container .piece {
+    background-color: white;
+}
+#othelloSettings .choice-container .stats-container .score {
+     position: absolute;
+     display: block;
+     vertical-align: bottom;
+     width: 100%;
+     height: 25%;
+     background-color: #2328b0;
+     outline: 2px solid black;
+     text-align: center;
+}
+#othelloSettings .choice-container .active .score, #othelloSettings .choice-container .active .piece-container {
+    z-index: 1;
+    outline: 2px solid red;
+}
+#othelloSettings .choice-container .stats-container .score .text {
+    font-size: 30px;
+    position: relative;
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgb(0, 0, 0);
+    line-height: 40px;
 }
 #othelloInfo {
     position: fixed;

@@ -296,6 +296,24 @@ and (max-device-width: 1024px) {
     -moz-border-radius: 100%;
     border-radius: 100%;
 }
+#othelloSettings .choice-container .stats-container .piece-container .piece .player {
+    width: 60%;
+    text-align: center;
+    height: 16px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 16px;
+    position: absolute;
+    text-shadow: 0 1px 0 rgb(0, 0, 0);
+    line-height: 16px;
+}
+#othelloSettings .choice-container .left .piece-container .piece .player {
+    color: white;
+}
+#othelloSettings .choice-container .right .piece-container .piece .player {
+    color: black;
+}
 #othelloSettings .choice-container .left .piece-container .piece {
     background-color: black;
 }

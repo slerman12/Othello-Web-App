@@ -311,10 +311,14 @@ function menu(){
         $('#othelloSettings .choice-container .left').addClass('active');
         if (playerClr === "W"){
             $('#othelloSettings .choice-container .right').addClass('active');
+            $('#othelloSettings .choice-container .right .player').html('You');
+            $('#othelloSettings .choice-container .left .player').html('Computer');
             computerTurn();
         }
         else{
             $('#othelloSettings .choice-container .left').addClass('active');
+            $('#othelloSettings .choice-container .left .player').html('You');
+            $('#othelloSettings .choice-container .right .player').html('Computer');
             playerTurn = true;
         }
         $('#othelloBoard .menu').fadeOut();

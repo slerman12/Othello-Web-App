@@ -128,7 +128,7 @@
 }
 #othelloBoard .menu .choice-container .active {
     z-index: 1;
-    outline: 2px solid red;
+    outline: 4px solid black;
 }
 #othelloBoard .menu .choice-container .piece-container .piece {
     width: 80%;
@@ -332,7 +332,7 @@ and (max-device-width: 1024px) {
 }
 #othelloSettings .choice-container .active .score, #othelloSettings .choice-container .active .piece-container {
     z-index: 1;
-    outline: 2px solid red;
+    outline: 4px solid black;
 }
 #othelloSettings .choice-container .stats-container .score .text {
     font-size: 30px;

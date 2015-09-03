@@ -126,6 +126,10 @@
 #othelloBoard .menu .choice-container .piece-container:hover  {
     background-color: #0986c1;
 }
+#othelloBoard .menu .choice-container .active:hover  {
+    background-color: #0aaeff;
+    cursor: default;
+}
 #othelloBoard .menu .choice-container .active {
     z-index: 1;
     outline: 4px solid black;

@@ -231,6 +231,9 @@ function computerTurn() {
             if((playerClr === "B" && blackScr > whiteScr) || (playerClr === "W" && whiteScr > blackScr)) {
                 Notification.show("<strong>Congratulations, you win!</strong> ", '#othelloBoard .default-notification .close', false, "info");
             }
+            else if (blackScr === whiteScr){
+                Notification.show("<strong>Not bad, it's a tie!</strong> ", '#othelloBoard .default-notification .close', false, "info");
+            }
             else{
                 Notification.show("<strong>Sorry, computer wins. Better luck next time!</strong> ", '#othelloBoard .default-notification .close', false, "info");
             }
